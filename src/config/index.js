@@ -15,6 +15,6 @@ const environment = {
 };
 
 const currentEnvironment = typeof(process.env.NODE_ENV) === 'string' ? process.env.NODE_ENV.toLowerCase() : '';
-const config = typeof(environment[currentEnvironment]) === 'object' ? environment[currentEnvironment] : environment.staging;
+const config = typeof(environment[currentEnvironment]) === 'object' ? environment[currentEnvironment] : environment.dev;
 
 module.exports = config;

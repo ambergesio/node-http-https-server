@@ -3,12 +3,14 @@ require('dotenv').config();
 const environment = {
 
   dev: {
-    port: 3000,
+    httpPort: 3000,
+    httpsPort: 3001,
     envName: 'development'
   },
 
   prod: {
-    port: 5001,
+    httpPort: 5000,
+    httpsPort: 5001,
     envName: 'production'
   }
 

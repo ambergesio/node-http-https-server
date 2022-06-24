@@ -67,7 +67,7 @@ You can send a payload, for example:
     "address_number": 1111
 }
 ```
-When the file is created, you should get this response:
+If the file is created, you should get this response:
 ```
 {
     "error": false,
@@ -83,7 +83,7 @@ When the file is created, you should get this response:
 ```
 ---
 ## Delete
-If you want to delete a file, you cant type:
+If you want to delete a file, you can type:
 ```
 localhost:3000/delete?location=saved&fileName=<your_file_name_here>
 ```

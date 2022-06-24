@@ -94,7 +94,7 @@ and you should get this response:
     "message": "File '<your_file_name_here>' deleted successully"
 }
 ```
-
+---
 ## HTTPS
 #
 In order to run the https server, both cert.pem and key.pem files are included.  

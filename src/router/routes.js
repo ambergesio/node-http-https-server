@@ -2,7 +2,10 @@ const handlers = require('./handlers/handlers');
 
 module.exports = {
   '': handlers.default,
-  'home': handlers.home,
+  'ping': handlers.ping,
+  'create': handlers.create,
+  'read': handlers.read,
+  'delete': handlers.delete,
   'pictures': handlers.pictures,
   'pictures/all': handlers.picturesAll,
   'pictures/delete': handlers.picturesDelete

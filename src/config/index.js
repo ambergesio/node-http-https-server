@@ -9,8 +9,8 @@ const environment = {
   },
 
   prod: {
-    httpPort: 5000,
-    httpsPort: 5001,
+    httpPort: 5001,
+    httpsPort: 5002,
     envName: 'production'
   }
 

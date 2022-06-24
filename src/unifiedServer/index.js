@@ -59,14 +59,6 @@ const unifiedServer = (req, res) => {
       res.writeHead(statusCode);
       res.end(payloadStringify);
 
-      // console.log(
-      //   `Server path: ${trimmedPath}.\n
-      //   Query: ${JSON.stringify(queryStringObject)}.\n
-      //   Method: ${method}.\n
-      //   Headers: ${JSON.stringify(headers)}\n
-      //   Body: ${buffer}`
-      // );
-
     });  
   });
 };

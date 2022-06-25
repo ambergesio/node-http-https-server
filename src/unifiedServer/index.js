@@ -3,7 +3,7 @@ const { StringDecoder } = require('string_decoder');
 
 
 const routers = require('../router/routes');
-const handlers = require('../router/handlers/handlers');
+const handlers = require('../router/handlers');
 
 
 

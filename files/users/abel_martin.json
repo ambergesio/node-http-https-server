@@ -1,0 +1,12 @@
+{
+  "firstName": "Abel Martín",
+  "lastName": "Bergesio",
+  "age": 44,
+  "address": "Willington Av",
+  "number": 222,
+  "guitars": [
+    "majesty",
+    "sterling",
+    "yamaha"
+  ]
+}

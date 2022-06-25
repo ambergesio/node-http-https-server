@@ -1,12 +1,11 @@
-const handlers = require('./handlers/handlers');
+const handlers = require('./handlers');
 
 module.exports = {
   '': handlers.default,
   'ping': handlers.ping,
+  'users': handlers.users,
   'create': handlers.create,
   'read': handlers.read,
-  'delete': handlers.delete,
-  'pictures': handlers.pictures,
-  'pictures/all': handlers.picturesAll,
-  'pictures/delete': handlers.picturesDelete
+  'update': handlers.update,
+  'delete': handlers.delete
 };

@@ -1,18 +1,5 @@
 const _users = require('./users');
 
-// const methods = {
-//     get: "get",
-//     post: "post",
-//     put: "put",
-//     patch: "patch",
-//     delete: "delete",
-//     copy: "copy",
-//     head: "head",
-//     options: "options",
-//     link: "link",
-//     unlink: "unlink",
-// };
-
 
 const handlers = {
     default: (data, cb) => {

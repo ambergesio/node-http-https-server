@@ -1,5 +1,18 @@
 const _users = require('./users');
 
+// const methods = {
+//     get: "get",
+//     post: "post",
+//     put: "put",
+//     patch: "patch",
+//     delete: "delete",
+//     copy: "copy",
+//     head: "head",
+//     options: "options",
+//     link: "link",
+//     unlink: "unlink",
+// };
+
 
 const handlers = {
     default: (data, cb) => {
@@ -11,12 +24,10 @@ const handlers = {
     },
 
     users: (data, cb) => {
-        const allowedMethods = ['get', 'post', 'put', 'delete'];
-        if (allowedMethods.indexOf(data.method) > -1) {
-           _users[data.method](data, cb);
-        } else {
-            cb(405, { error: true, messaage: 'Method not allowed.'});
-        }
+        const usersMethods = { get: "get", post: "post", put: "put", delete: "delete"};
+        
+        if (!usersMethods[data.method]) return cb(405, { error: true, messaage: 'Method not allowed.'});
+        _users[data.method](data, cb);
     },
 
     notFound: (data, cb) => {

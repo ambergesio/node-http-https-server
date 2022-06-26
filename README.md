@@ -1,6 +1,6 @@
 # NODE http/https server with (almost) 0 dependences
 
-To install packages (only dotenv is required and just for fun, 'cause it contains only dev/prod param)
+To install packages (only dotenv is required and it contains only dev/prod param)
 run in console:
 ```
 npm i
@@ -27,71 +27,116 @@ Server running on http://localhost:5001 in production mode
 Server running on https://localhost:5002 in production mode
 ```
 #
-# You can create, read or delete .json files on 'files' folder.
+# You can create, read, update or delete .json files on 'files' folder.
 
-## Read file
-To read a file, you can open a new tab in POSTMAN and type
+
+## RESTful methods added: GET, POST, PUT, DELETE.
+---
+
+## Read file from 'users'
+To read a file, you can do a GET request and a query with an id number in POSTMAN:
 ```
-localhost:3000/read?location=saved&fileName=abel_martin
+GET localhost:3000/users?id=22333444
 ```
 
 You should get a json response like this:
 ```
 {
     "error": null,
-    "message": "File 'abel_martin' read successully",
+    "message": "File '22333444' read successfully",
     "data": {
-        "name": "Abel Martin",
-        "lastName": "Bergesio",
-        "age": 44,
-        "address": "Av Siempreviva",
-        "address_number": 222
+        "firstName": "John",
+        "lastName": "Doe",
+        "dni": 22333444,
+        "age": 22,
+        "address": "Boulebard road",
+        "number": 333,
+        "password": 1234
     }
 }
 ```
 ---
 ## Create file
 
-to create a new json file on 'saved' folder, you can open a POSTMAN tab and type:
+to create a new user, do a POST request in POSTMAN: 
 ```
-localhost:3000/create?location=saved&fileName=<your_file_name_here>
+POST localhost:3000/users
 ```
 
-You can send a payload, for example:
+and send a payload with these fields:
 ```
 {
-    "name": "John",
-    "lastName": "Doe",
-    "age": 55,
-    "address": "Willington",
-    "address_number": 1111
+  "firstName": "Chris",
+  "lastName": "Rock",
+  "age": 57,
+  "dni": 123456,
+  "address": "Milton road",
+  "number": 222,
+  "password": 1234
 }
 ```
 If the file is created, you should get this response:
 ```
 {
     "error": false,
-    "message": "File '<your_file_name_here>' created successfully.",
+    "message": "File '123456' created successfully.",
     "data": {
-        "name": "John",
-        "lastName": "Doe",
-        "age": 55,
-        "address": "Willington",
-        "address_number": 1111
+        "firstName": "Chris",
+        "lastName": "Rock",
+        "age": 57,
+        "dni": 123456,
+        "address": "Milton road",
+        "number": 222,
+        "password": 1234
     }
 }
+// "dni" number will be used as the .json name //
+// you cannot create a user with a dni number that already exists //
+// in a future update, password will be saved hashed and won't be included in the response //
 ```
 ---
-## Delete
-If you want to delete a file, you can type:
+## Update
+If you want to update a user, you can do a PUT request with a query using the dni number you want to update as an id:
 ```
-localhost:3000/delete?location=saved&fileName=<your_file_name_here>
+PUT localhost:3000/users?id=123456
 ```
-and you should get this response:
+
+and send a payload with the fields you want to update:
+```
+{
+  "firstName": "Will",
+  "lastName": "Smith"
+}
+```
+you should get this response:
 ```
 {
     "error": false,
-    "message": "File '<your_file_name_here>' deleted successully"
+    "message": "File '123456' updated successfully.",
+    "data": {
+        "firstName": "Will",
+        "lastName": "Smith",
+        "age": 57,
+        "dni": 123456,
+        "address": "Milton road",
+        "number": 222,
+        "password": 1234
+    }
+}
+// "dni" is the only field that cannot be edited //
+```
+---
+
+## Delete
+If you want to delete a user, you can do a DELETE request with a query using the dni number you want to delete as an id:
+```
+DELETE localhost:3000/users?id=123456
+```
+you should get this response:
+```
+{
+    "error": false,
+    "message": "File '123456' deleted successfully"
 }
 ```
 ---

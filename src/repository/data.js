@@ -21,7 +21,7 @@ const createFile = (dir, file, data, cb) => {
                 }
             });
         } else {
-            cb(`Could not create '${file}', Folder '${dir}' may not exist or file may already exist.`);
+            cb(`Could not create file '${file}' because it already exists.`);
         }
     });
 }
@@ -39,9 +39,8 @@ const updateFile = (dir, file, data, cb) => {
             if (error) return cb(`Could not update the file '${file}', it may not exist.`, null);
             fs.readFile(fd, 'utf-8', (error, saved) => {
                 if (error) return cb(`Error reading the file ${file}`);
-                const formattedData = JSON.parse(data.payload);
                 const savedData = JSON.parse(saved);
-                const updatedData = {...savedData, ...formattedData};
+                const updatedData = {...savedData, ...data};
                 const stringifiedData = JSON.stringify(updatedData, null, 2);
     
                 fs.truncate(fd, 0, (error) => {
@@ -50,7 +49,7 @@ const updateFile = (dir, file, data, cb) => {
                         if (error) return cb("Error when trying to save updated data to file", null)
                         fs.close(fd, (error) => {
                             if (error) return cb("error when trying to close file", null);
-                            cb(null, updatedData);
+                            cb(null, updatedData, file);
                         })
                     })
                 })

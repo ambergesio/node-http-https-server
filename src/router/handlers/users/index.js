@@ -1,11 +1,11 @@
-const { createFunction, readFunction, updateFunction, deleteFunction } = require('../daos')
+const { createUser, readUser, updateUser, deleteUser } = require('../../../daos');
 
 
 const _users = {
-      'post': createFunction,
-       'get': readFunction,
-       'put': updateFunction,
-    'delete': deleteFunction
+      'post': createUser,
+       'get': readUser,
+       'put': updateUser,
+    'delete': deleteUser
 }
 
 module.exports = _users;

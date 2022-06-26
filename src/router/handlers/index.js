@@ -1,4 +1,3 @@
-const { createFunction, readFunction, deleteFunction, updateFunction } = require('./daos');
 const _users = require('./users');
 
 
@@ -19,14 +18,6 @@ const handlers = {
             cb(405, { error: true, messaage: 'Method not allowed.'});
         }
     },
-
-    create: createFunction,
-
-    read: readFunction,
-
-    update: updateFunction,
-
-    delete: deleteFunction,
 
     notFound: (data, cb) => {
         cb(404, { error: true, message: "What you are looking for, does not exist."});

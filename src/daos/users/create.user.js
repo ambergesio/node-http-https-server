@@ -1,6 +1,6 @@
 const { createFile } = require('../../repository/data');
 const validateUser = require('../../validators/users.validator');
-const hashedPassword = require('../../helpers/hashPassword');
+const hashPassword = require('../../helpers/hashPassword');
 const parseData = require('../../helpers/parseData');
 
 const createUser = (data, cb) => {
@@ -12,7 +12,7 @@ const createUser = (data, cb) => {
         if (err) return cb(400, {error: err, message: `Invalid data: ${msj}` });
         
         const fileName = parsedData.dni;
-        const encryptedPassword = hashedPassword(parsedData.password);
+        const encryptedPassword = hashPassword(parsedData.password);
         parsedData.password = encryptedPassword;
         const stringData = JSON.stringify(parsedData, null, 4);
 

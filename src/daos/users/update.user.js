@@ -1,7 +1,7 @@
 const { updateFile } = require('../../repository/data');
 const usersUpdateValidator = require('../../validators/usersUpdate.validator');
 const parseData = require('../../helpers/parseData');
-const hashedPassword = require('../../helpers/hashPassword');
+const hashPassword = require('../../helpers/hashPassword');
 
 const updateUser = (data, cb) => {
 
@@ -12,7 +12,7 @@ const updateUser = (data, cb) => {
         if (err) return cb(400, { error: true, message: msj });
 
         if (parsedData.password) {
-            const encryptedPassword = hashedPassword(parsedData.password);
+            const encryptedPassword = hashPassword(parsedData.password);
             parsedData.password = encryptedPassword;
         }
 

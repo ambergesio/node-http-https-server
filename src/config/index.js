@@ -5,13 +5,15 @@ const environment = {
   dev: {
     httpPort: 3000,
     httpsPort: 3001,
-    envName: 'development'
+    envName: 'development',
+    secret: 'thisIsTheSecretUsedToHashPasswords'
   },
-
+  
   prod: {
     httpPort: 5001,
     httpsPort: 5002,
-    envName: 'production'
+    envName: 'production',
+    secret: 'thisIsTheSecretUsedToHashPasswords'
   }
 
 };

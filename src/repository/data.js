@@ -6,8 +6,7 @@ const baseDir = path.join(__dirname, './../../files');
 const createFile = (dir, file, data, cb) => {
     fs.open(`${baseDir}/${dir}/${file}.json`, 'wx', (error, fileDescriptor) => {
         if (!error && fileDescriptor) {
-            const stringData = data.payload;
-            fs.writeFile(fileDescriptor, stringData, (error) => {
+            fs.writeFile(fileDescriptor, data, (error) => {
                 if (!error) {
                     fs.close(fileDescriptor, (error) => {
                         if (!error) {

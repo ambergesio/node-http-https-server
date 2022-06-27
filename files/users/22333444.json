@@ -1,9 +1,11 @@
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "dni": 22333444,
-  "age": 22,
-  "address": "Boulebard road",
-  "number": 333,
-  "password": 1234
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "mail@mail.com",
+    "dni": 22333444,
+    "age": 22,
+    "phone": 2233445566,
+    "address": "Boulebard road",
+    "number": 333,
+    "password": "Pass@test$34"
 }

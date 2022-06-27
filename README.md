@@ -47,11 +47,13 @@ You should get a json response like this:
     "data": {
         "firstName": "John",
         "lastName": "Doe",
+        "email": "mail@mail.com",
         "dni": 22333444,
         "age": 22,
+        "phone": 2233445566,
         "address": "Boulebard road",
         "number": 333,
-        "password": 1234
+        "password": "Pass@test$34"
     }
 }
 ```
@@ -66,28 +68,32 @@ POST localhost:3000/users
 and send a payload with these fields:
 ```
 {
-  "firstName": "Chris",
-  "lastName": "Rock",
-  "age": 57,
-  "dni": 123456,
-  "address": "Milton road",
-  "number": 222,
-  "password": 1234
+    "firstName": "Chris",
+    "lastName": "Rock",
+    "email": "mail@mail.com",
+    "dni": 12345678,
+    "age": 57,
+    "phone": 1122334455,
+    "address": "Milton road",
+    "number": 222,
+    "password": "Pass@test$34"
 }
 ```
 If the file is created, you should get this response:
 ```
 {
     "error": false,
-    "message": "File '123456' created successfully.",
+    "message": "File '12345678' created successfully.",
     "data": {
         "firstName": "Chris",
         "lastName": "Rock",
+        "email": "mail@mail.com",
+        "dni": 12345678,
         "age": 57,
-        "dni": 123456,
+        "phone": 1122334455,
         "address": "Milton road",
         "number": 222,
-        "password": 1234
+        "password": "Pass@test$34"
     }
 }
 // "dni" number will be used as the .json name //
@@ -112,18 +118,20 @@ you should get this response:
 ```
 {
     "error": false,
-    "message": "File '123456' updated successfully.",
+    "message": "File '12345678' updated successfully.",
     "data": {
         "firstName": "Will",
         "lastName": "Smith",
+        "email": "mail@mail.com",
+        "dni": 12345678,
         "age": 57,
-        "dni": 123456,
+        "phone": 1122334455,
         "address": "Milton road",
         "number": 222,
-        "password": 1234
+        "password": "Pass@test$34"
     }
 }
-// "dni" is the only field that cannot be edited //
+// "dni" and "email are the only fields that cannot be edited //
 ```
 ---
 
@@ -136,7 +144,7 @@ you should get this response:
 ```
 {
     "error": false,
-    "message": "File '123456' deleted successfully"
+    "message": "File '12345678' deleted successfully"
 }
 ```
 ---

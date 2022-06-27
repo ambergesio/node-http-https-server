@@ -131,7 +131,7 @@ you should get this response:
         "password": "Pass@test$34"
     }
 }
-// "dni" and "email are the only fields that cannot be edited //
+// "dni" and "email" are the only fields that cannot be edited //
 ```
 ---
 

@@ -1,0 +1,11 @@
+{
+  "firstName": "Abel Martín",
+  "lastName": "Bergesio",
+  "email": "mail@mail.com",
+  "dni": 12345678,
+  "age": 44,
+  "phone": 2932510179,
+  "address": "Brown",
+  "number": 776,
+  "password": "Pass@test$34"
+}

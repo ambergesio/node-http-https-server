@@ -4,6 +4,7 @@ const validateUser = require('../../validators/users.validator');
 
 const createUser = (data, cb) => {
     
+    if (!data.payload) return cb(400, { error: true, message: 'Invalid data. All fields must be completed' })
     const parsedData = JSON.parse(data.payload);
 
     validateUser(parsedData, (err, msj) => {

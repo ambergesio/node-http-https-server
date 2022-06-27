@@ -10,7 +10,7 @@ const createFile = (dir, file, data, cb) => {
                 if (!error) {
                     fs.close(fileDescriptor, (error) => {
                         if (!error) {
-                            cb(false, file);
+                            cb(false, data, file);
                         } else {
                             cb('Error closing new file.', null);
                         }
@@ -41,14 +41,14 @@ const updateFile = (dir, file, data, cb) => {
                 const savedData = JSON.parse(saved);
                 const updatedData = {...savedData, ...data};
                 const stringifiedData = JSON.stringify(updatedData, null, 2);
-    
+
                 fs.truncate(fd, 0, (error) => {
                     if (error) return cb('An error occurred when trying to update the file', null);
                     fs.writeFile(fd, stringifiedData, (error) => {
                         if (error) return cb("Error when trying to save updated data to file", null)
                         fs.close(fd, (error) => {
                             if (error) return cb("error when trying to close file", null);
-                            cb(null, updatedData, file);
+                            cb(null, stringifiedData, file);
                         })
                     })
                 })

@@ -1,5 +1,7 @@
 const { updateFile } = require('../../repository/data');
 const usersUpdateValidator = require('../../validators/usersUpdate.validator');
+const parseData = require('../../helpers/parseData');
+const hashedPassword = require('../../helpers/hashPassword');
 
 const updateUser = (data, cb) => {
 
@@ -7,12 +9,19 @@ const updateUser = (data, cb) => {
     if (!data.queryStringObject.id) return cb(400, { error: true, message: 'You must provide an id number in order to edit a user'});
 
     usersUpdateValidator( parsedData, (err, msj) => {
-
         if (err) return cb(400, { error: true, message: msj });
+
+        if (parsedData.password) {
+            const encryptedPassword = hashedPassword(parsedData.password);
+            parsedData.password = encryptedPassword;
+        }
 
         updateFile('users', data.queryStringObject.id, parsedData, (error, updatedData, file) => {
             if (error) return cb(500, { error: true, message: error});
-            return cb(201, {error: false, message: `File '${file}' updated successfully.`, data: updatedData });
+            
+            const parsedData = parseData(updatedData);
+            delete parsedData.password;
+            return cb(201, {error: false, message: `File '${file}' updated successfully.`, data: parsedData });
         });
     })
 }

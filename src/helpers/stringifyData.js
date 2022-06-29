@@ -1,9 +1,8 @@
 const stringifyData = (obj) => {
-    if (typeof(obj) === 'object') {
-        // console.log("object stringified!");
+    try {
         return JSON.stringify(obj, null, 4);
-    } else {
-        // console.log("failed to stringify!");
+    }
+    catch (e) {
         return "";
     }
 };

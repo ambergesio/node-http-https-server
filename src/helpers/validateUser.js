@@ -17,8 +17,6 @@ const validateUser = (data, cb) => {
 
         const savedUser = parseData(user);
 
-        // if (password !== savedUser.password) return cb("Wrong credentials, you must login with a valid account.", null, file);
-
         if (password === savedUser.password || user.status === "admin") {
             delete savedUser.password;
             return cb( false, savedUser, file);

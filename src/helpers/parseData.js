@@ -1,10 +1,9 @@
 const parseData = (str) => {
-    if (typeof(str) === "string") {
-        // console.log("string parsed!");
+   try {
         return JSON.parse(str);
-    } else {
-        // console.log("failed to parse!");
-        return {}
+    }
+    catch (error) {
+        return {};
     }
 };
 

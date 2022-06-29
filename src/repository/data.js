@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const baseDir = path.join(__dirname, './../../files');
+const parseData = require('../helpers/parseData');
+const stringifyData = require('../helpers/stringifyData');
 
 
 const createFile = (dir, file, data, cb) => {
@@ -35,27 +37,27 @@ const updateFile = (dir, file, data, cb) => {
     fs.open(`${baseDir}/${dir}/${file}.json`, 'r', (error) => {
         if (error) return cb(`File '${file}' could not be updated because it doesn't exist`, null);
         fs.open(`${baseDir}/${dir}/${file}.json`, 'a+', (error, fd) => {
-            if (error) return cb(`Could not update the file '${file}', it may not exist.`, null);
+            if (error) return cb(`An error occurred when trying to open file '${file}'.`, null);
             fs.readFile(fd, 'utf-8', (error, saved) => {
                 if (error) return cb(`Error reading the file ${file}`);
-                const savedData = JSON.parse(saved);
+                const savedData = parseData(saved);
                 const updatedData = {...savedData, ...data};
-                const stringifiedData = JSON.stringify(updatedData, null, 2);
+                const stringifiedData = stringifyData(updatedData);
 
                 fs.truncate(fd, 0, (error) => {
                     if (error) return cb('An error occurred when trying to update the file', null);
                     fs.writeFile(fd, stringifiedData, (error) => {
-                        if (error) return cb("Error when trying to save updated data to file", null)
+                        if (error) return cb("An error when trying to save updated data to file", null)
                         fs.close(fd, (error) => {
                             if (error) return cb("error when trying to close file", null);
                             cb(null, stringifiedData, file);
-                        })
-                    })
-                })
-            })
-        })
-    })
-}
+                        });
+                    });
+                });
+            });
+        });
+    });
+};
 
 const deleteFile = (dir, file, cb) => {
     fs.unlink(`${baseDir}/${dir}/${file}.json`, (error) => {

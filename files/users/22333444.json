@@ -1,11 +1,12 @@
 {
     "firstName": "John",
     "lastName": "Doe",
-    "email": "mail@mail.com",
+    "email": "johndoe@mail.com",
     "dni": 22333444,
-    "age": 22,
-    "phone": 2233445566,
+    "age": 33,
+    "phone": 2323232323,
     "address": "Boulebard road",
     "number": 333,
-    "password": "Pass@test$34"
+    "password": "3c94ef5140e47c3ff0150abf230d406f9be7afe3732984235f620a1177a0863c",
+    "status": "admin"
 }

@@ -7,7 +7,7 @@ const readUser = (data, cb) => {
 
     readFile('users', data.queryStringObject.id, (error, data, file) => {
 
-        if (error) return cb(404, { error: true, message: error + ` File '${file}' could not be read because it may not exist.`});
+        if (error) return cb(404, { error: true, message: error + ` File '${file}' could not be read because it doesn't exist.`});
         
         const parsedData = parseData(data);
         delete parsedData.password;

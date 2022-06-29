@@ -148,6 +148,22 @@ you should get this response:
 }
 ```
 ---
+## User login
+To log in with registered user credentials, send a POST to
+```
+POST localhost:3000/auth/login
+```
+with this payload:
+```
+{
+    "dni": 22333444,
+    "password": "John@1234
+}
+```
+Admin user can delete all accounts but an ordinary user can only delete its own account.
+
+---
+
 ## HTTPS
 #
 In order to run the https server, both cert.pem and key.pem files are included.  

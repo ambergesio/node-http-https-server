@@ -1,3 +1,6 @@
+const { readFile, deleteToken } = require("../repository/data");
+const parseData = require("./parseData");
+
 const verifyToken = (data, cb) => {
 
     if (!data.headers.authorization) return cb(true, 'Invalid or missing token(a). Login in order to access');

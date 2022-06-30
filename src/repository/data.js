@@ -23,14 +23,14 @@ const createFile = (dir, file, data, cb) => {
             });
         } else {
             cb(`Could not create file '${file}' because it already exists.`);
-        }
+        };
     });
-}
+};
 
 const readFile = (dir, file, cb) => {
     fs.readFile(`${baseDir}/${dir}/${file}.json`, 'utf-8', (error, data) => {
         cb(error, data, file);
-    })
+    });
 };
 
 const updateFile = (dir, file, data, cb) => {
@@ -50,7 +50,7 @@ const updateFile = (dir, file, data, cb) => {
                         if (error) return cb("An error when trying to save updated data to file", null)
                         fs.close(fd, (error) => {
                             if (error) return cb("error when trying to close file", null);
-                            cb(null, stringifiedData, file);
+                            return cb(null, stringifiedData, file);
                         });
                     });
                 });

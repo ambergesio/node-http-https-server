@@ -1,19 +1,30 @@
 const validateUser = require("../../../helpers/validateUser");
-const generateTokenId = require("../../../helpers/generateTokenId");
+const verifyToken = require("../../../helpers/verifyToken");
+const createToken = require('../../../helpers/createToken');
 
 
 const authLogin = (data, cb) => {
+
     if (!data.payload) return cb(400, { error: true, message: 'You must send a payload in order to continue'});
 
     //returns error, user data and file name
-    validateUser(data.payload, (error, data, file) => {
-        if (error) return cb( 400, { error: true, message: `Invalid user. Error: ${error}`} );
-        const generatedToken = generateTokenId(30);
-        const expiresIn = Date.now() + 3600000;
-        const token = `${generatedToken}*${data.dni}*${expiresIn}`
+    validateUser(data.payload, (error, userData, file) => {
 
-        return cb( 200, { error: error, message: "Valid user, you may continue.", data, file, token });
+        if (error) return cb( 400, { error: true, message: `Invalid user or password`} );
+        
+        createToken(userData, (error, token) => {
+            if (error) return cb(400, { error: true, message: 'Token could not be generated properly. Login again'});
+            return cb( 200, { error: error, message: "Valid user, you may continue.", token });
+        });
+
+    });
+};
+
+const checkroute = (data, cb) => {
+    verifyToken(data, (error, datos) => {
+        if (error) return cb(400, { error: true, message: `An error occurred ${error}`});
+        return cb(200, { error: false, data: datos});
     });
 }
 
-module.exports = { authLogin };
+module.exports = { authLogin, checkroute };

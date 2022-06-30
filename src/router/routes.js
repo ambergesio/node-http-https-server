@@ -4,5 +4,6 @@ module.exports = {
   '': handlers.default,
   'ping': handlers.ping,
   'users': handlers.users,
-  'auth/login': handlers.userLogin
+  'auth/login': handlers.userLogin,
+  'auth/protected': handlers.protectedRoute
 };

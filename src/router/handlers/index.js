@@ -1,5 +1,5 @@
 const _users = require('./users');
-const { authLogin } = require('./auth');
+const { authLogin, checkroute } = require('./auth');
 
 const handlers = {
     default: (data, cb) => {
@@ -21,6 +21,12 @@ const handlers = {
         const usedMethods = { post: "post"};
         if (!usedMethods[data.method]) return cb(405, { error: true, message: 'Method no allowed. '} );
         authLogin(data, cb);
+    },
+
+    protectedRoute: (data, cb) => {
+        const usedMethods = {post: 'post'};
+        if (!usedMethods[data.method]) return cb(405, { error: true, message: 'Method not allowed'} );
+        checkroute(data, cb);
     },
 
     notFound: (data, cb) => {

@@ -1,18 +1,27 @@
 const verifyToken = (data, cb) => {
 
+    if (!data.headers.authorization) return cb(true, 'Invalid or missing token(a). Login in order to access');
     const token = data.headers.authorization.split(' ')[1];
-    if (!token) return cb(true, "You habe to login in order to acces this endpoint");
     
     const dataFromToken = token.split('_');
     const tokenFile = dataFromToken[0];
-    const tokenDni = dataFromToken[1];
-    const tokenDate = dataFromToken[2];
+    const tokenDni = Number(dataFromToken[1]);
+    const tokenDate = Number(dataFromToken[2]);
     
-    const currentDate = Date.now();
+    readFile('tokens', tokenFile, (error, data, file) => {
+        if (error) return cb(true, 'Invalid or missing token(b). Login in order to access');
 
-    if ( tokenDate < currentDate) return cb(false, "Token expired, please login again.");
+        const { dni, createdAt, expiresIn } = parseData(data);
+        const currentDate = Date.now();
 
-    return cb(false, { tokenFile, tokenDni, currentDate, tokenDate })
-}
+        if ( expiresIn < currentDate) {
+            deleteToken('tokens', tokenFile);
+            return cb(true, 'Token expired. Login again in order to access.');
+        }
+        if ( tokenDni === dni && tokenDate === createdAt ) return cb(false, { tokenFile, dni, tokenDni, currentDate, expiresIn, tokenDate, createdAt });
+        return cb(true, 'Invalid or missing token(c). Login again in order to access.');
+    });
+};
+
 
 module.exports = verifyToken;

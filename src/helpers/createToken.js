@@ -6,7 +6,7 @@ const stringifyData = require('./stringifyData');
 const createToken = (user, cb) => {
     const generatedToken = generateTokenId(30);
     const createdAt = Date.now();
-    const expiresIn = createdAt + 900000;
+    const expiresIn = createdAt + 1800000;
 
     const dataUser = {
         dni: user.dni,
@@ -19,7 +19,7 @@ const createToken = (user, cb) => {
     createFile('tokens', generatedToken, stringifyData(dataUser), (error, data, file) => {
         const parsedData = parseData(data);
         if (error) return cb(error, null);
-        const token = `${generatedToken}_${parsedData.dni}_${expiresIn}`;
+        const token = `${generatedToken}_${parsedData.dni}_${createdAt}`;
         return cb(false, token);
     });
 };

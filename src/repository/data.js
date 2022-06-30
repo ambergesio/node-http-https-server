@@ -66,5 +66,9 @@ const deleteFile = (dir, file, cb) => {
     })
 };
 
+const deleteToken = (dir, file) => {
+    fs.unlinkSync(`${baseDir}/${dir}/${file}.json`);
+};
 
-module.exports = { createFile, readFile, updateFile, deleteFile };
+
+module.exports = { createFile, readFile, updateFile, deleteFile, deleteToken };

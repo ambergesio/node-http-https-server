@@ -15,7 +15,7 @@ const validateUser = (data, cb) => {
     const hashedPassword = hashPassword(password);
     
     readFile('users', dni, (error, user, file) => {
-        if (error) return cb(`An error occurred ${error}`, null, file);
+        if (error) return cb(true, `An error occurred ${error}`, file);
 
         const savedUser = parseData(user);
         if ( hashedPassword === savedUser.password || savedUser.status === "admin") {

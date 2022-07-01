@@ -5,19 +5,20 @@ const parseData = require("./parseData");
 
 const validateUser = (data, cb) => {
 
-    if (!data) return cb('You must provide dni and password to continue', null, null);
-    const logUser = parseData(data);
+    if (!data) return cb( true, 'You must provide an id and a password to continue', null);
 
-    if (!logUser.dni || !logUser.password || logUser.dni === undefined || logUser.password === undefined) return cb('You must provide dni and password to continue', null, null);
-    const password = hashPassword(logUser.password);
-    const id = logUser.dni;
+    const { dni, password } = parseData(data);
+    if ( !dni || !password || typeof dni !== 'number' || typeof password !== 'string') {
+        return cb(true, 'You must provide a valid id and password to continue.', null);
+    };
 
-    readFile('users', id, (error, user, file) => {
+    const hashedPassword = hashPassword(password);
+    
+    readFile('users', dni, (error, user, file) => {
         if (error) return cb(`An error occurred ${error}`, null, file);
 
         const savedUser = parseData(user);
-
-        if (password === savedUser.password || user.status === "admin") {
+        if ( hashedPassword === savedUser.password || savedUser.status === "admin") {
             delete savedUser.password;
             return cb( false, savedUser, file);
         };

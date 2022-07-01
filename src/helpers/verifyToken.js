@@ -14,14 +14,14 @@ const verifyToken = (data, cb) => {
     readFile('tokens', tokenFile, (error, data, file) => {
         if (error) return cb(true, 'Invalid or missing token(b). Login in order to access');
 
-        const { dni, createdAt, expiresIn } = parseData(data);
+        const { dni, email, phone, status, createdAt, expiresIn } = parseData(data);
         const currentDate = Date.now();
 
         if ( expiresIn < currentDate) {
             deleteToken('tokens', tokenFile);
             return cb(true, 'Token expired. Login again in order to access.');
         }
-        if ( tokenDni === dni && tokenDate === createdAt ) return cb(false, { tokenFile, dni, tokenDni, currentDate, expiresIn, tokenDate, createdAt });
+        if ( tokenDni === dni && tokenDate === createdAt ) return cb(false, { dni, email, phone, status, createdAt, expiresIn });
         return cb(true, 'Invalid or missing token(c). Login again in order to access.');
     });
 };

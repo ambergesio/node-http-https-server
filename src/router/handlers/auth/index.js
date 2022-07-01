@@ -5,10 +5,8 @@ const createToken = require('../../../helpers/createToken');
 
 const authLogin = (data, cb) => {
 
-    if (!data.payload) return cb(400, { error: true, message: 'You must send a payload in order to continue'});
     validateUser(data.payload, (error, userData, file) => {
-
-        if (error) return cb( 400, { error: true, message: `Invalid user or password`} );
+        if (error) return cb( 400, { error: true, message: userData} );
         createToken(userData, (error, token) => {
             if (error) return cb(400, { error: true, message: 'Token could not be generated properly. Login again'});
             return cb( 200, { error: error, message: "Valid user, you may continue.", token });

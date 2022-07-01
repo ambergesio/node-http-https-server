@@ -12,6 +12,7 @@ const createToken = (user, cb) => {
         dni: user.dni,
         email: user.email,
         phone: user.phone,
+        status: user.status || "standard",
         createdAt,
         expiresIn
     };

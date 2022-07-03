@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <title>http-https node server</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+        body {
+            background-color: rgb(232, 232, 232);
+        }
+        .title {
+            font-family: 'Roboto';
+            font-size: 28px;
+            font-weight: bolder;
+            color: #0261ba;
+        }
+        .subtitle {
+            font-family: 'Roboto';
+            font-size: 20px;
+            font-weight: 700;
+            color: #007cef;
+        }
+        p {
+            font-family: 'Roboto';
+            margin: 16px 6px;
+            font-size: 15px;
+        }
+        .separator {
+            border-bottom: solid 2px #55adff;
+        }
+        .tit_separator {
+            border-bottom: solid 1px #6e6e6e;
+        }
+        .comment {
+            margin: 12px;
+            padding: 12px;
+        }
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 16px;
+            color: #f2f2f2;
+            background-color: black;
+            border-radius: 8px;
+        }
+        .get {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 16px;
+            color: #0baaff;
+            background-color: black;
+            border-radius: 8px;
+        }
+        .post {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 16px;
+            color: #b2ff18;
+            background-color: black;
+            border-radius: 8px;
+        }
+        .put {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 16px;
+            color: #ff850b;
+            background-color: black;
+            border-radius: 8px;
+        }
+        .delete {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 16px;
+            color: #ff400b;
+            background-color: black;
+            border-radius: 8px;
+        }
+        .path {
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: .1rem;
+            margin-left: 3px;
+            color: white;
+        }
+        .query {
+            font-family: 'Courier New', Courier, monospace;
+            margin-left: 3px;
+            color: #ffb871;
+        }
+    </style>
+
+    <div class="title">
+        NODE http/https server with (almost) 0 dependences
+    </div>
+    <br>
+    <br>
+    <div class="tit_separator"></div><br>
+    <div class="subtitle">Installation</div><br>
+    <div class="tit_separator"></div><br>
+    <p>To install packages (only dotenv is required and it contains only dev/prod param) run in console:</p>
+    
+    <div class="code">
+        npm i
+    </div>
+    <br>
+    <p>To run the server, use the following command:</p>
+    
+    <div class="code">
+        npm start<br><br>
+        > http_server@1.0.0 start <br>
+        > node src/index <br> <br>
+        Server running on http://localhost:3000 in development mode <br>
+        Server running on https://localhost:3001 in development mode <br>
+    </div>
+    
+
+    <br>
+    <p>or, if you have nodemon globally installed, you can run it with:</p>
+    
+    <div class="code">
+        npm run dev<br><br> 
+        > http_server@1.0.0 dev<br>
+        > nodemon src/index<br>
+        <br>[nodemon] 2.0.15
+        <br>[nodemon] to restart at any time, enter `rs`
+        <br>[nodemon] watching path(s): *.*
+        <br>[nodemon] watching extensions: js,mjs,json
+        <br>[nodemon] starting `node src/index.js`
+        <br>Server running on http://localhost:3000 in development mode
+        <br>Server running on https://localhost:3001 in development mode
+    </div>
+    
+    <br>
+    <br>
+    
+    <div class="tit_separator"></div><br>
+    <div class="subtitle">process.env</div><br>
+    <div class="tit_separator"></div>
+    <br>
+    <p>
+        With NODE_ENV set to 'dev' on .env file, server will run in development mode:
+    </p>
+    
+    <div class="code">
+        Server running on http://localhost:3000 in development mode
+        Server running on https://localhost:3001 in development mode
+    </div>
+    <br>
+
+    <p>
+        With NODE_ENV set to 'prod' on .env file, server will run in production mode:
+    </p>
+
+    <div class="code">
+        Server running on http://localhost:5001 in production mode
+        Server running on https://localhost:5002 in production mode
+    </div>
+    
+    <br><br>
+    
+    <div class="separator"></div>
+    
+    <br><br>
+    
+    <div class="title">You can create, read, update or delete USERS</div>
+    
+    <p>
+        new users will be saved in 'files/users' folder. Allowed methods are: GET, POST, PUT, and DELETE.
+    </p>
+    
+    <br><br>
+    <div class="tit_separator"></div><br>
+    <div class="subtitle">Create a new user</div><br>
+    <div class="tit_separator"></div>
+    <br>
+    
+    <p>To create a new user, send a POST request to:</p>
+    
+    <div class="post comment">POST&emsp;localhost:3000<span class="path">/users</span></div>
+    <p>
+        including this payload:
+    </p>
+    
+    <div class="code">
+        //example json
+        <br> {
+        <br> &emsp; &emsp; "firstName": "Thomas",
+        <br> &emsp; &emsp; "lastName": "Anderson",
+        <br> &emsp; &emsp; "email": "theone@gmail.com",
+        <br> &emsp; &emsp; "dni": 10111011,
+        <br> &emsp; &emsp; "age": 28,
+        <br> &emsp; &emsp; "phone": 1011010011,
+        <br> &emsp; &emsp; "address": "Meta Cortex",
+        <br> &emsp; &emsp; "number": 101011,
+        <br> &emsp; &emsp; "password": "Neo@redpill0110"
+        <br> }
+    </div>
+    
+    <p>If the user is created, you should get this JSON response:</p>
+    
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "error": false,
+        <br> &emsp; &emsp; "message": "File '10111011' created successfully.",
+        <br> &emsp; &emsp; "data": {
+        <br> &emsp; &emsp; &emsp; &emsp; "firstName": "Thomas",
+        <br> &emsp; &emsp; &emsp; &emsp; "lastName": "Anderson",
+        <br> &emsp; &emsp; &emsp; &emsp; "email": "theone@gmail.com",
+        <br> &emsp; &emsp; &emsp; &emsp; "dni": 10111011,
+        <br> &emsp; &emsp; &emsp; &emsp; "age": 28,
+        <br> &emsp; &emsp; &emsp; &emsp; "phone": 1011010011,
+        <br> &emsp; &emsp; &emsp; &emsp; "address": "Meta Cortex",
+        <br> &emsp; &emsp; &emsp; &emsp; "number": 101011
+        <br> &emsp; &emsp; }
+        <br> }
+        <br> // "dni" number will be used as the name of the new .json file.  
+        <br> // you cannot create a user with a dni number that already exists.
+        <br> // The password will be hashed before saving the user and won't be included in the response.
+    </div>
+        
+    <br><br>
+    <div class="tit_separator"></div><br>
+    <div class="subtitle">Get User's data</div><br>
+    <div class="tit_separator"></div>
+    <br>
+    
+    <p>
+        To get the data from a user, first you need to login, in order to get a token. Send a POST request to:
+    </p>
+    
+    <div class="post comment">
+        POST&emsp;localhost:3000<span class="path">/auth/login</span>
+    </div>
+    
+    <p>with this payload:</p>
+    
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "dni": 10111011,
+        <br> &emsp; &emsp; "password": "Neo@redpill0110"
+        <br> }
+    </div>
+    <p>
+        You should get a JSON response like this:
+    </p>
+
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "error": false,
+        <br> &emsp; &emsp; "message": "Valid user, you may continue.",
+        <br> &emsp; &emsp; "token": "3zx6ttgs83aajqs4qqfk4o3ot7u7mm_22444555_1656684014589"
+        <br> }
+    </div>
+    
+    <p>The generated token consists of three parts, separated by an underscore ( _ ).</p>
+    <p>The first part is a 30 random character string that will be used to name a token file saved in 'files/tokens' folder.</p>
+    <p>The second part is the user's dni and the third part is the creation date of the file.</p>
+    <br>
+
+    <p>
+        This will be the content of the created file:
+    </p>
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "dni": 10111011,
+        <br> &emsp; &emsp; "email": "theone@gmail.com",
+        <br> &emsp; &emsp; "phone": 1011010011,
+        <br> &emsp; &emsp; "status": "standard",
+        <br> &emsp; &emsp; "createdAt": 1656690355939,
+        <br> &emsp; &emsp; "expiresIn": 1656692155939
+        <br> }
+    </div>
+    
+    <br>
+    
+    <p>
+        Then you can do a GET request, sending the user's dni (id) by query params and the generated token in Authorization Bearer header:
+    </p>
+    
+    <div class="get comment">
+        GET&emsp;localhost:3000<span class="path">/users?</span><span class="query">id=10111011</span>
+    </div>
+    
+    <div class="get comment">
+        Authorization <span class="path">Bearer </span><span class="query">3zx6ttgs83aajqs4qqfk4o3ot7u7mm_22444555_1656684014589</span>
+    </div>
+    
+    <br>
+    
+    <p>You should get a JSON response like this:</p>
+    
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "error": null,
+        <br> &emsp; &emsp; "message": "File '10111011' read successfully",
+        <br> &emsp; &emsp; "data": {
+        <br> &emsp; &emsp; &emsp; &emsp; "firstName": "Thomas",
+        <br> &emsp; &emsp; &emsp; &emsp; "lastName": "Anderson",
+        <br> &emsp; &emsp; &emsp; &emsp; "email": "theone@gmail.com",
+        <br> &emsp; &emsp; &emsp; &emsp; "dni": 10111011,
+        <br> &emsp; &emsp; &emsp; &emsp; "age": 28,
+        <br> &emsp; &emsp; &emsp; &emsp; "phone": 1011010011,
+        <br> &emsp; &emsp; &emsp; &emsp; "address": "Meta Cortex",
+        <br> &emsp; &emsp; &emsp; &emsp; "number": 101011
+        <br> &emsp; &emsp; }
+        <br> }
+    </div>
+    
+    <br><br>
+    <div class="tit_separator"></div><br>
+    <div class="subtitle">Update User's data</div><br>
+    <div class="tit_separator"></div><br>
+    
+    
+    <p>
+        If you want to update a user, you can do a PUT request with a query using the dni number you want to update as an id:
+    </p>
+    
+    <div class="put comment">
+        PUT&emsp;localhost:3000<span class="path">/users?</span><span class="query">id=10111011</span>
+    </div>
+    
+    <div class="get comment">
+        Authorization <span class="path">Bearer </span><span class="query">3zx6ttgs83aajqs4qqfk4o3ot7u7mm_22444555_1656684014589</span>
+    </div>
+    
+    
+    <p>and send a payload with the fields you want to update:</p>
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "firstName": "Neo",
+        <br> &emsp; &emsp; "lastName": "The one",
+        <br> &emsp; &emsp; "address": "The Matrix",
+        <br> }
+    </div>    
+        
+    <p>
+        you should get this response:
+    </p>
+    
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "error": false,
+        <br> &emsp; &emsp; "message": "File '10111011' updated successfully.",
+        <br> &emsp; &emsp; "data": {
+        <br> &emsp; &emsp; &emsp; &emsp;"firstName": "Neo",
+        <br> &emsp; &emsp; &emsp; &emsp;"lastName": "The one",
+        <br> &emsp; &emsp; &emsp; &emsp;"email": "theone@gmail.com",
+        <br> &emsp; &emsp; &emsp; &emsp;"dni": 10111011,
+        <br> &emsp; &emsp; &emsp; &emsp;"age": 28,
+        <br> &emsp; &emsp; &emsp; &emsp;"phone": 1011010011,
+        <br> &emsp; &emsp; &emsp; &emsp;"address": "The Matrix",
+        <br> &emsp; &emsp; &emsp; &emsp;"number": 101011
+        <br> &emsp; &emsp;}
+        <br> }
+        <br> // "dni" and "email" are the only fields that cannot be edited //
+    </div>
+        
+    <br>
+    <br>
+    
+    <div class="tit_separator"></div><br>
+    <div class="title">Delete a user</div><br>
+    <div class="tit_separator"></div><br>
+    
+    <p>
+        If you want to delete a user, you can do a DELETE request with a query using the dni of the user you want to delete:
+    </p>
+    
+    <div class="delete comment">
+        DELETE&emsp;localhost:3000<span class="path">/users?</span><span class="query">id=10111011</span>
+    </div>
+    
+    <br>
+    
+    <p>
+        you should get this response:
+    </p>
+        
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "error": false,
+        <br> &emsp; &emsp; "message": "File '10111011' deleted successfully"
+        <br> }
+    </div>
+        
+    <br>
+        
+    <div class="code">
+        // ONLY ADMIN USER can update/delete/get data from all accounts but standard users can only do it with their own account.
+    </div>
+    
+    <br>
+    <br>
+    
+    <div class="tit_separator"></div><br>
+    <div class="subtitle">Token expiration</div><br>
+    <div class="tit_separator"></div>
+    
+    <br>
+    
+    <p>Tokens last for 30 minutes. After that time, you'll get a response like this:</p>
+    
+    <div class="code">
+        {
+        <br> &emsp; &emsp; "error": true,
+        <br> &emsp; &emsp; "message": "Token expired. Login again in order to access."
+        <br> }
+    </div>
+    
+    <br><br>
+    <div class="separator"></div>
+    <br><br><br>
+    <div class="title">HTTPS</div><br>
+    <div class="tit_separator"></div><br>
+    <p>
+        In order to run the https server, both cert.pem and key.pem files are included. They are just for testing purpose and only work on localhost domain.
+    </p>
+    
+</body>
+</html>

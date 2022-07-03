@@ -1,8 +1,7 @@
 const handlers = require('./handlers');
 
 module.exports = {
-  '': handlers.default,
-  'ping': handlers.ping,
+  '': handlers.home,
   'users': handlers.users,
   'auth/login': handlers.userLogin,
   'auth/protected': handlers.protectedRoute

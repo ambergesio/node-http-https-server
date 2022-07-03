@@ -1,13 +1,11 @@
 const _users = require('./users');
 const { authLogin, checkroute } = require('./auth');
+const {staticFile} = require('./static_files');
 
 const handlers = {
-    default: (data, cb) => {
-        cb(200, { error: false, message: 'Servidor http en node. Rutas: /create?location=<folder_name>&fileName=<file_name>  /read?location=<folder_name>&fileName=<file_name>       /pictures ---- /pictures/all ---- /pictures/delete' });
-    },
 
-    ping: (data, cb) => {
-        cb(200, { error: false, message: 'ping', data: data});
+    home: async (data, cb) => {
+        cb(200, await staticFile('index') );
     },
 
     users: (data, cb) => {
@@ -29,8 +27,8 @@ const handlers = {
         checkroute(data, cb);
     },
 
-    notFound: (data, cb) => {
-        cb(404, { error: true, message: "What you are looking for, does not exist."});
+    notFound: async (data, cb) => {
+        cb(404, await staticFile('404'));
     }
 }
 

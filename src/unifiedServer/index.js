@@ -52,12 +52,12 @@ const unifiedServer = (req, res) => {
     //route the request to the chosen handler from path
     choosenHandler(data, (statusCode, payload) => {
       statusCode = typeof(statusCode) === 'number' ? statusCode : 400;
-      payload = typeof(payload) === 'object' ? payload : {};
-      const payloadStringify = JSON.stringify(payload);
-
-      res.setHeader('Content-Type', 'application/json')
+      payload = typeof(payload) === 'object' ? JSON.stringify(payload) : payload;
+      let type = typeof(payload) === 'object' ? 'application/json' : 'text/html';
+      
+      res.setHeader('Content-Type', type);
       res.writeHead(statusCode);
-      res.end(payloadStringify);
+      res.end(payload);
 
     });  
   });

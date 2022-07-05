@@ -23,7 +23,7 @@ const automation = {
             });
             console.log("Run automation", new Date());
             // automation runs every hour
-        }, 300000);
+        }, 3600000);
     }
 };
     

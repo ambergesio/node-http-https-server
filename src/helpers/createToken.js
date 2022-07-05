@@ -6,7 +6,7 @@ const stringifyData = require('./stringifyData');
 const createToken = (user, cb) => {
     const generatedToken = generateTokenId(30);
     const createdAt = Date.now();
-    const expiresIn = createdAt + 1800000;
+    const expiresIn = createdAt + 150000;
 
     const dataUser = {
         dni: user.dni,

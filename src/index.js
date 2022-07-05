@@ -1,10 +1,13 @@
-const { httpServer, httpsServer} = require('./server');
-const config = require('./config');
+const server = require('./server/server');
+const automation = require('./server/automation');
 
 
-httpServer.listen(config.httpPort, () => {
-  console.log(`Server running on http://localhost:${config.httpPort} in ${config.envName} mode`);
-});
-httpsServer.listen(config.httpsPort, () => {
-  console.log(`Server running on https://localhost:${config.httpsPort} in ${config.envName} mode`);
-});
+const app = {
+    init: server.init,
+    automation: automation
+};
+
+app.init();
+app.automation.init();
+
+module.exports = app;

@@ -4,6 +4,15 @@ const baseDir = path.join(__dirname, './../../files');
 const parseData = require('../helpers/parseData');
 const stringifyData = require('../helpers/stringifyData');
 
+const readFolder = (dir, cb) => {
+    fs.readdir(`${baseDir}/${dir}`, (error, files) => {
+        if (!error && files) {
+            cb(false, files)
+        } else {
+            cb(true, null);
+        }
+    });
+};
 
 const createFile = (dir, file, data, cb) => {
     fs.open(`${baseDir}/${dir}/${file}.json`, 'wx', (error, fileDescriptor) => {
@@ -71,4 +80,4 @@ const deleteToken = (dir, file) => {
 };
 
 
-module.exports = { createFile, readFile, updateFile, deleteFile, deleteToken };
+module.exports = { readFolder, createFile, readFile, updateFile, deleteFile, deleteToken };

@@ -53,7 +53,7 @@ const updateFile = (dir, file, data, cb) => {
                 const updatedData = {...savedData, ...data};
                 const stringifiedData = stringifyData(updatedData);
 
-                fs.truncate(fd, 0, (error) => {
+                fs.ftruncate(fd, 0, (error) => {
                     if (error) return cb('An error occurred when trying to update the file', null);
                     fs.writeFile(fd, stringifiedData, (error) => {
                         if (error) return cb("An error when trying to save updated data to file", null)

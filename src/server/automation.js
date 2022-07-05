@@ -3,7 +3,7 @@ const { readFolder, readFile, deleteToken } = require('../repository/data');
 
 const automation = {
     init: () => {
-        console.log("Start automation", new Date());
+        console.log("Automation started", new Date());
         setInterval(() => {
             readFolder('tokens', (error, files) => {
                 if (!error && files) {
@@ -23,7 +23,7 @@ const automation = {
             });
             console.log("Run automation", new Date());
             // automation runs every hour
-        }, 3600000);
+        }, 300000);
     }
 };
     

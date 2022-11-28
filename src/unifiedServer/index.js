@@ -13,7 +13,7 @@ const unifiedServer = (req, res) => {
 
   //get the path from the parsed url
   const path = parsedUrl.pathname;
-  // deletes / grom the beginning and end but not from the middle
+  // deletes / from the beginning and end but not from the middle
   const trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
   //get the query from the parsed url
